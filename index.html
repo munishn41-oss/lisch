@@ -16,7 +16,7 @@
             --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
             --glass-border: rgba(255, 255, 255, 0.5);
             --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 0 10px rgba(255, 255, 255, 0.3);
-            --primary: #0ea5e9; /* Изменен на современный Sky Blue */
+            --primary: #0ea5e9; 
             --primary-hover: #0284c7;
             --spring: cubic-bezier(0.25, 0.8, 0.25, 1); 
             --bg-gradient-animated: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #f1f5f9);
@@ -68,7 +68,18 @@
         ::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: var(--radius-max); }
 
         .glass { background: var(--glass-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
-        .app-container { width: 95vw; height: 92vh; border-radius: var(--radius-med); display: flex; overflow: hidden; position: relative; max-height: 100dvh;}
+        
+        /* ПРИЛОЖЕНИЕ НА ВЕСЬ ЭКРАН СО СКРУГЛЕНИЯМИ */
+        .app-container { 
+            width: calc(100vw - 20px); 
+            height: calc(100vh - 20px); 
+            margin: 10px;
+            border-radius: var(--radius-med); 
+            display: flex; 
+            overflow: hidden; 
+            position: relative; 
+        }
+        
         .icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         .svg-icon { width: 20px; height: 20px; fill: currentColor; }
 
@@ -110,6 +121,7 @@
         .chat-info h4 { margin-bottom: 5px; font-size: 15px; display: flex; align-items: center; justify-content: space-between; border-radius: var(--radius-max);}
         .chat-info p { font-size: 13px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
         .pin-icon-svg { width: 14px; height: 14px; margin-left: 5px; color: var(--primary); transform: rotate(45deg); opacity: 0.8; flex-shrink: 0;}
+        .saved-icon { fill: var(--primary); }
 
         /* ================= ОКНО ЧАТА И СООБЩЕНИЯ ================= */
         .chat-window { flex: 1; display: flex; flex-direction: column; background: var(--chat-bg-image, transparent); background-size: cover; background-position: center; position: relative; min-width: 0; border-radius: var(--radius-med); transition: opacity 0.3s ease, transform 0.3s ease;}
@@ -259,7 +271,7 @@
 
         /* ================= АДАПТИВНОСТЬ (МОБИЛКИ) ================= */
         @media (max-width: 768px) {
-            .app-container { width: 100vw; height: 100dvh; border-radius: 0; border: none; box-shadow: none;}
+            .app-container { width: 100vw; height: 100dvh; margin: 0; border-radius: 0; border: none; box-shadow: none;}
             .sidebar { position: fixed; top: 0; left: -100px; height: 100dvh; padding-top: 60px; box-shadow: 5px 0 25px rgba(0,0,0,0.1); }
             .sidebar.mobile-open { left: 0; }
             .hamburger-btn { display: flex; justify-content: center; align-items: center;}
@@ -426,7 +438,7 @@
         <aside class="sidebar" id="mainSidebar">
             <div tabindex="0" class="sidebar-btn active" onclick="toggleMobileMenu(true);"><svg class="icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
             <div tabindex="0" class="sidebar-btn" onclick="toggleTheme(); toggleMobileMenu(true);"><svg class="icon" id="themeIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></div>
-            <div tabindex="0" class="sidebar-btn" onclick="openSettings(); toggleMobileMenu(true);"><svg class="icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+            <div tabindex="0" class="sidebar-btn" onclick="openSettings(); toggleMobileMenu(true);"><svg class="icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
             <div tabindex="0" class="my-avatar" id="myAvatarIcon" onclick="openProfileModal(); toggleMobileMenu(true);"></div>
         </aside>
 
@@ -521,38 +533,25 @@
     </div>
 
     <script>
-        // --- ИНИЦИАЛИЗАЦИЯ FIREBASE (С НОВЫМ КЛЮЧОМ И ЗАЩИТОЙ) ---
+        // --- ИНИЦИАЛИЗАЦИЯ FIREBASE ---
         const firebaseConfig = {
-            apiKey: "AIzaSyDpDCCNxLPWnXc7rI5lrnKz3W0Gqaxbb5o",
-            authDomain: "lisch-ap.firebaseapp.com",
-            databaseURL: "https://lisch-ap-default-rtdb.firebaseio.com",
-            projectId: "lisch-ap",
-            storageBucket: "lisch-ap.firebasestorage.app",
-            messagingSenderId: "881625960274",
-            appId: "1:881625960274:web:edc649bb5205dea8a8f48b",
-            measurementId: "G-4DR4QMD8Z6"
+            apiKey: "AIzaSyCfU9YaEPnefYnAUqrkM450x9wgglY9Q04",
+            authDomain: "massanger-56c59.firebaseapp.com",
+            projectId: "massanger-56c59",
+            storageBucket: "massanger-56c59.firebasestorage.app",
+            messagingSenderId: "1002077744530",
+            appId: "1:1002077744530:web:5880340688d8fee742a54b",
+            measurementId: "G-SNJLH60XNJ"
         };
+        firebase.initializeApp(firebaseConfig);
+        try { firebase.analytics(); } catch(e) {}
         
-        // Надежно инициализируем приложение
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
-        // Объявляем глобальные переменные для БД и Авторизации, 
-        // чтобы они точно не "потерялись"
         const db = firebase.firestore();
         const auth = firebase.auth();
 
-        // Оборачиваем аналитику в блок try-catch! 
-        // Если AdBlock её заблокирует, скрипт НЕ сломается и мессенджер будет работать.
-        try {
-            firebase.analytics();
-        } catch (e) {
-            console.warn("Аналитика заблокирована или недоступна", e);
-        }
-
-        // Дефолтный пустой аватар (SVG)
+        // Иконки и аватары
         const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
+        const SAVED_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230ea5e9'%3E%3Cpath d='M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E";
 
         // ЗВУКИ
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -592,16 +591,30 @@
 
         // --- УПРАВЛЕНИЕ СТАТУСОМ (ОНЛАЙН) ---
         function setOnlineStatus(isOnline) {
-            if (currentUser && userData && db) {
+            if (currentUser && userData) {
                 db.collection('users').doc(currentUser.uid).update({
                     status: isOnline ? 'В сети' : 'Не в сети',
                     lastActive: firebase.firestore.FieldValue.serverTimestamp()
-                }).catch(()=>{}); // Игнор ошибок при закрытии вкладки
+                }).catch(()=>{});
             }
         }
         window.addEventListener('focus', () => setOnlineStatus(true));
         window.addEventListener('blur', () => setOnlineStatus(false));
         window.addEventListener('beforeunload', () => setOnlineStatus(false));
+
+        // --- СОЗДАНИЕ ИЗБРАННОГО ---
+        async function ensureSavedMessagesChat() {
+            const snap = await db.collection('chats').where('participants', '==', [currentUser.uid]).get();
+            if (snap.empty) {
+                await db.collection('chats').add({
+                    participants: [currentUser.uid],
+                    isGroup: false,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastMessage: 'Ваши заметки',
+                    isSavedMessages: true
+                });
+            }
+        }
 
         // --- GOOGLE И ГОСТЕВАЯ АВТОРИЗАЦИЯ ---
         auth.onAuthStateChanged(async (user) => {
@@ -613,12 +626,12 @@
                     document.getElementById('authModal').style.display = 'none';
                     setOnlineStatus(true);
                     updateProfileVisuals();
+                    await ensureSavedMessagesChat();
                     loadChats();
                     listenForIncomingCalls();
                     loadStories();
                 } else {
                     if (user.isAnonymous) {
-                        // Автоматически создаем гостевой профиль
                         const rand = Math.floor(Math.random() * 10000);
                         await db.collection('users').doc(user.uid).set({
                             uid: user.uid, name: 'Гость ' + rand, username: '@guest_' + rand, photoURL: DEFAULT_AVATAR, status: 'В сети', isGuest: true
@@ -691,7 +704,6 @@
         
         async function saveProfile() {
             userData.name = document.getElementById('editProfileName').value.trim() || 'Без имени'; 
-            // Не перезаписываем онлайн статус вручную, сохраняем только имя и фото
             await db.collection('users').doc(currentUser.uid).update({ name: userData.name, photoURL: userData.photoURL });
             updateProfileVisuals(); closeProfileModal(); showToast('Профиль сохранен');
         }
@@ -703,7 +715,7 @@
             document.getElementById('settingsModal').style.display = 'flex';
         }
         function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; localStorage.setItem('glassMsgSettings', JSON.stringify(SETTINGS)); }
-        function updateAccentColor(c) { SETTINGS.accentColor = c; document.documentElement.style.setProperty('--primary', c); }
+        function updateAccentColor(c) { SETTINGS.accentColor = c; document.documentElement.style.setProperty('--primary', c); SAVED_AVATAR.replace('%230ea5e9', encodeURIComponent(c)); }
         function toggleBlur(c) { SETTINGS.disableBlur = c; c ? document.body.classList.add('no-blur') : document.body.classList.remove('no-blur'); }
         function toggleIncognito(c) { SETTINGS.incognito = c; c ? document.body.classList.add('incognito-mode') : document.body.classList.remove('incognito-mode'); }
         function handleChatBgUpload(e) {
@@ -720,24 +732,41 @@
             const t = document.getElementById('toast'); t.innerText = msg; t.style.opacity = '1'; setTimeout(() => t.style.opacity = '0', 3000);
         }
 
-        // --- ПОИСК И СОЗДАНИЕ ГРУПП ---
+        // --- ИСПРАВЛЕННЫЙ ПОИСК ---
         async function searchUsersForChat() {
-            const q = document.getElementById('searchUserToChat').value.trim().toLowerCase();
-            const list = document.getElementById('foundUsersList'); list.innerHTML = '';
-            if(q.length < 2) return;
-            const snap = await db.collection('users').orderBy('username').startAt(q).endAt(q + '\uf8ff').limit(5).get();
-            snap.forEach(doc => {
-                const u = doc.data(); if(u.uid === currentUser.uid) return;
-                const isSelected = selectedUsersForGroup.includes(u.uid);
-                list.innerHTML += `<div class="user-select-item ${isSelected ? 'selected' : ''}" onclick="toggleUserSelection('${u.uid}')"><img src="${u.photoURL}" style="width:35px; height:35px; border-radius:50%; object-fit:cover;"><div><b>${u.name}</b> <br><small style="color:var(--primary);">${u.username}</small></div></div>`;
-            });
+            let q = document.getElementById('searchUserToChat').value.trim().toLowerCase();
+            const list = document.getElementById('foundUsersList'); 
+            list.innerHTML = '';
+            
+            if(q.length < 1) return;
+            
+            // Автоматически добавляем @ для поиска по юзернейму
+            if (!q.startsWith('@')) q = '@' + q;
+
+            try {
+                const snap = await db.collection('users').orderBy('username').startAt(q).endAt(q + '\uf8ff').limit(10).get();
+                
+                if (snap.empty) {
+                    list.innerHTML = `<div style="text-align:center; padding:10px; color:#888;">Пользователь не найден.</div>`;
+                    return;
+                }
+
+                snap.forEach(doc => {
+                    const u = doc.data(); 
+                    if(u.uid === currentUser.uid) return;
+                    const isSelected = selectedUsersForGroup.includes(u.uid);
+                    list.innerHTML += `<div class="user-select-item ${isSelected ? 'selected' : ''}" onclick="toggleUserSelection('${u.uid}')"><img src="${u.photoURL}" style="width:35px; height:35px; border-radius:50%; object-fit:cover;"><div><b>${u.name}</b> <br><small style="color:var(--primary);">${u.username}</small></div></div>`;
+                });
+            } catch (e) {
+                list.innerHTML = `<div style="text-align:center; padding:10px; color:#ff4d4d;">Ошибка: нет доступа. Проверьте права Firestore.</div>`;
+            }
         }
 
         function toggleUserSelection(uid) {
             const idx = selectedUsersForGroup.indexOf(uid);
             if(idx > -1) selectedUsersForGroup.splice(idx, 1); else selectedUsersForGroup.push(uid);
             document.getElementById('groupNameInput').style.display = selectedUsersForGroup.length > 1 ? 'block' : 'none';
-            searchUsersForChat();
+            searchUsersForChat(); // обновляем визуал выделения
         }
 
         function closeNewChatModal() { document.getElementById('newChatModal').style.display = 'none'; selectedUsersForGroup = []; document.getElementById('searchUserToChat').value = ''; document.getElementById('foundUsersList').innerHTML = ''; document.getElementById('groupNameInput').style.display = 'none'; }
@@ -768,7 +797,15 @@
                 let tempChats = [];
                 for (const doc of snapshot.docs) {
                     let chat = doc.data(); chat.id = doc.id;
-                    if (!chat.isGroup) {
+                    
+                    // Проверка на чат "Избранное"
+                    if (chat.participants.length === 1 && chat.participants[0] === currentUser.uid) {
+                        chat.name = "Избранное";
+                        chat.avatar = SAVED_AVATAR;
+                        chat.status = "Ваши заметки и файлы";
+                        chat.isSavedMessages = true;
+                        chat.pinned = true;
+                    } else if (!chat.isGroup) {
                         const otherUid = chat.participants.find(id => id !== currentUser.uid);
                         const userSnap = await db.collection('users').doc(otherUid).get();
                         if(userSnap.exists) { 
@@ -778,11 +815,20 @@
                             chat.otherUid = otherUid; 
                         }
                     } else { chat.status = chat.participants.length + ' участников'; }
+                    
                     const savedPin = JSON.parse(localStorage.getItem('pinnedChats') || '{}');
-                    chat.pinned = savedPin[chat.id] || false;
+                    if (savedPin[chat.id]) chat.pinned = true;
+                    
                     tempChats.push(chat);
                 }
-                tempChats.sort((a,b) => (b.pinned - a.pinned));
+                
+                // Избранное всегда первое, затем закрепленные
+                tempChats.sort((a,b) => {
+                    if (a.isSavedMessages) return -1;
+                    if (b.isSavedMessages) return 1;
+                    return (b.pinned - a.pinned);
+                });
+                
                 myChats = tempChats;
                 renderChats();
             });
@@ -792,7 +838,7 @@
             const list = document.getElementById('chatList'), q = document.getElementById('chatSearch').value.toLowerCase();
             list.innerHTML = '';
             myChats.filter(c => c.name && c.name.toLowerCase().includes(q)).forEach(chat => {
-                const pinIcon = chat.pinned ? '<svg class="pin-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4l4 4-2 2-1-1-3.5 3.5 1.5 1.5-1 1-3.5-3.5L4 18l-1-1 7.5-7.5-3.5-3.5 1-1 1.5 1.5L13 3l-1-1 2-2 4 4z"></path></svg>' : '';
+                const pinIcon = chat.pinned && !chat.isSavedMessages ? '<svg class="pin-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4l4 4-2 2-1-1-3.5 3.5 1.5 1.5-1 1-3.5-3.5L4 18l-1-1 7.5-7.5-3.5-3.5 1-1 1.5 1.5L13 3l-1-1 2-2 4 4z"></path></svg>' : '';
                 list.innerHTML += `
                     <div class="chat-item ${chat.id === currentChatId ? 'active' : ''} glass" onclick="openChat('${chat.id}')" oncontextmenu="showChatMenu(event, '${chat.id}')">
                         <img src="${chat.avatar || DEFAULT_AVATAR}" class="avatar">
@@ -817,7 +863,7 @@
             statusEl.innerText = chat.status;
             statusEl.className = chat.status === 'В сети' ? 'status-online' : '';
 
-            if(!chat.isGroup && chat.otherUid) {
+            if(!chat.isGroup && chat.otherUid && !chat.isSavedMessages) {
                 if(unsubscribeStatus) unsubscribeStatus();
                 unsubscribeStatus = db.collection('users').doc(chat.otherUid).onSnapshot(doc => {
                     if(doc.exists) {
@@ -829,7 +875,7 @@
             } else { if(unsubscribeStatus) unsubscribeStatus(); }
 
             document.getElementById('messageInputContainer').style.display = 'flex';
-            document.getElementById('callActions').style.display = chat.isGroup ? 'none' : 'flex';
+            document.getElementById('callActions').style.display = (chat.isGroup || chat.isSavedMessages) ? 'none' : 'flex';
             renderChats(); cancelReply(); cancelEdit(); cancelFile();
 
             if (window.innerWidth <= 768) { 
@@ -863,7 +909,6 @@
 
                     let contentHtml = '';
                     
-                    // Пометка о пересылке
                     if(msg.isForwarded) {
                         contentHtml += `<div style="font-size:11px; font-weight:bold; color:inherit; margin-bottom:4px; opacity:0.8;">↪ Переслано</div>`;
                     }
@@ -1032,13 +1077,20 @@
             showToast('Переслано!'); closeForwardModal();
         }
 
+        async function deleteChat() { 
+            hideAllMenus(); 
+            if (selectedChatIdMenu) { 
+                const chat = myChats.find(c => c.id === selectedChatIdMenu);
+                if (chat.isSavedMessages) return showToast('Нельзя удалить Избранное');
+                
+                if(confirm('Удалить чат (только для вас)?')) {
+                    const newParts = chat.participants.filter(p => p !== currentUser.uid);
+                    await db.collection('chats').doc(selectedChatIdMenu).update({ participants: newParts });
+                    if(currentChatId === selectedChatIdMenu) closeChatMobile();
+                }
+            }
+        }
         async function deleteMsg() { hideAllMenus(); if(confirm('Удалить сообщение?')) { await db.collection('chats').doc(currentChatId).collection('messages').doc(selectedMsgId).delete(); } }
-        async function deleteChat() { hideAllMenus(); if(selectedChatIdMenu && confirm('Удалить чат (только для вас)?')) { 
-            const chat = myChats.find(c=>c.id===selectedChatIdMenu);
-            const newParts = chat.participants.filter(p => p !== currentUser.uid);
-            await db.collection('chats').doc(selectedChatIdMenu).update({ participants: newParts });
-            if(currentChatId === selectedChatIdMenu) closeChatMobile();
-        }}
         function togglePinChat() { hideAllMenus(); const savedPin = JSON.parse(localStorage.getItem('pinnedChats') || '{}'); savedPin[selectedChatIdMenu] = !savedPin[selectedChatIdMenu]; localStorage.setItem('pinnedChats', JSON.stringify(savedPin)); renderChats(); }
 
         // --- СТОРИС ---
